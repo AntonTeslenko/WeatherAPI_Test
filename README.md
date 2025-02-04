@@ -10,6 +10,7 @@ Scripts to validate the GET request response (status code, weather data, etc.).
 Screenshot of the test results from running the Postman collection.
 5. Response to GET request
 Screenshot of the JSON response from OpenWeather API for Dnipro.
+
 How to Use:
 Import OpenWeatherAPI.postman_collection and WeatherAPI.postman_environment into Postman.
 Set your API key in the environment variable API_KEY.
