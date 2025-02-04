@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "5dda34f8-0e19-4f22-9b77-3717c9a415d8",
+		"name": "OpenWeatherAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31851608"
+	},
+	"item": [
+		{
+			"name": "Get Current Weather",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Статус-код 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Перевірка, що місто - Дніпро\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Dnipro\");\r",
+							"    pm.expect(jsonData.sys.country).to.eql(\"UA\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Перевірка температури\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.main).to.have.property(\"temp\");\r",
+							"    pm.expect(jsonData.main).to.have.property(\"feels_like\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Перевірка даних про вітер\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.wind).to.have.property(\"speed\");\r",
+							"    pm.expect(jsonData.wind).to.have.property(\"deg\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Перевірка, що поле 'weather' не пусте\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.weather.length).to.be.above(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?q={{CITY}}&appid={{API_KEY}}&units=metric",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{CITY}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{API_KEY}}"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
